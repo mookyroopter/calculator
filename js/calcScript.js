@@ -1,12 +1,13 @@
 let buttons = document.querySelectorAll(".numberButton");
 let input = document.querySelector("#input");
+input.defaultValue="0";
 let operators = document.querySelectorAll(".operator");
-console.log(operators);
-let inputValue = '';
+console.log(input);
+let inputValue = '0';
 let firstValue = '';
 let secondValue = '';
 let currentOperator = '';
-
+let lastClicked = '';
 
 
 function add(a,b) {
@@ -42,6 +43,8 @@ function operator(op,a,b){
         return multiply(a,b);
     } else if (op === "/") {
         return divide(a,b);
+    } else if (op === "") {
+        
     } else {
         alert ("you fucked up");
     }
@@ -53,15 +56,29 @@ function getValue(input) {
 }
 
 function addToInput(number) {
-    console.log(number);
-    inputValue = inputValue + number;
-    input.value = inputValue;
+    if ((inputValue === "0" || inputValue === '') && lastClicked === '') {
+        console.log("here #1")
+        inputValue = number;
+        input.value = inputValue;
+    } else if (inputValue != '0' && lastClicked === 'number'){
+        console.log("in here #2!");
+        //console.log(number);
+        inputValue = inputValue + number;
+        input.value = inputValue;
+    } else if (inputValue != '0' && lastClicked === 'operator') {
+        console.log("here #3");
+        input.value = number;
+        inputValue = number;
+        //input.textContent = number;
+    }
+    
 }
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
         let numberToPass = getValue(button);
         addToInput(numberToPass);
+        lastClicked = 'number';
     });
 
 });
@@ -73,11 +90,11 @@ function clearInput() {
     input.value = inputValue;
 }
 function clearFirst() {
-    firstValue = '';
+    firstValue = '0';
 }
 
 function clearSecond() {
-    secondValue = '';
+    secondValue = '0';
 }
 
 
@@ -85,74 +102,122 @@ operators[0].addEventListener('click', () => {
     clearInput();
     clearFirst();
     clearSecond();
+    currentOperator = '';
+    input.value = "0";
+    input.textContent = '0';
+    lastClicked = '';
 });
 
-function storeNumber () {
-    firstValue = input.value;
-    clearInput();
+function storeNumber (output) {
+    firstValue = output;
+    input.value = output;
+    input.textContent = output;
+    clearSecond();
 }
 
-for (let i = 1; i <= 4; i++) {
-    operators[i].addEventListener('click', () => {
-        storeNumber();
-    });
-}
 
 operators[1].addEventListener('click', () => {
-    if (currentOperator != '') {
-        console.log(currentOperator);
+    if (currentOperator === "" && lastClicked === '='){
+        firstValue = input.value;
+        //output = operator("+", firstValue, secondValue);
+        //storeNumber(output);
+        currentOperator = "+";
+    }
+    else if (currentOperator === '' && lastClicked === 'number') {
+        secondValue = input.value;
+        output = operator("+", firstValue, secondValue);
+        storeNumber(output);
+        currentOperator = "+";
+    }
+    else {
         secondValue = input.value;
         output = operator(currentOperator, firstValue, secondValue);
-        firstValue = output;
-        console.log(output);
-        input.value = firstValue;
-        clearSecond()
+        storeNumber(output);
+        currentOperator = "+";
     }
-    currentOperator = "+";
+    lastClicked = 'operator';   
 });
 
 operators[2].addEventListener('click', () => {
-    if (currentOperator != '') {
+    if (currentOperator === "" && lastClicked === '='){
+        firstValue = input.value;
+        //output = operator("+", firstValue, secondValue);
+        //storeNumber(output);
+        currentOperator = "-";
+    }
+    else if (currentOperator === '' && lastClicked === 'number') {
+        console.log("in subtract!");
+        firstValue = input.value;
+        output = operator("-", firstValue, "0");
+        storeNumber(output);
+        currentOperator = "-";
+    }
+    else {
         secondValue = input.value;
         output = operator(currentOperator, firstValue, secondValue);
-        firstValue = output;
-        input.value = firstValue;
-        clearSecond()
+        storeNumber(output);
+        currentOperator = "-";
     }
-    
-    currentOperator = "-";
+    lastClicked = 'operator';   
 });
 
 operators[3].addEventListener('click', () => {
-    if (currentOperator != '') {
+    if (currentOperator === "" && lastClicked === '='){
+        firstValue = input.value;
+        //output = operator("+", firstValue, secondValue);
+        //storeNumber(output);
+        currentOperator = "*";
+    }
+    else if (currentOperator === '' && lastClicked === 'number') {
+        console.log("in multiply!");
+        firstValue = input.value;
+        output = operator("*", firstValue, "1");
+        storeNumber(output);
+        currentOperator = "*";
+    }
+    else {
         secondValue = input.value;
         output = operator(currentOperator, firstValue, secondValue);
-        firstValue = output;
-        input.value = firstValue;
-        clearSecond()
+        storeNumber(output);
+        currentOperator = "*";
     }
-    
-    currentOperator = "*";
+    lastClicked = 'operator';   
 });
 
 operators[4].addEventListener('click', () => {
-    if (currentOperator != '') {
+    if (currentOperator === "" && lastClicked === '='){
+        firstValue = input.value;
+        //output = operator("+", firstValue, secondValue);
+        //storeNumber(output);
+        currentOperator = "/";
+    }
+    else if (currentOperator === '' && lastClicked === 'number') {
+        console.log("in divide!");
+        firstValue = input.value;
+        output = operator("/", firstValue, "1");
+        storeNumber(output);
+        currentOperator = "/";
+    }
+    else {
         secondValue = input.value;
         output = operator(currentOperator, firstValue, secondValue);
-        firstValue = output;
-        input.value = firstValue;
-        clearSecond()
+        storeNumber(output);
+        currentOperator = "/";
     }
-    
-    currentOperator = "/";
+    lastClicked = 'operator';   
 });
 
 operators[5].addEventListener('click', () => {
-    secondValue = input.value;
     console.log(currentOperator);
-    output = operator(currentOperator, firstValue, secondValue);
-    firstValue = output;
-    input.value = firstValue;
-    clearSecond();
+    if (currentOperator === '') {
+
+    } else {
+        secondValue = input.value;
+        output = operator(currentOperator, firstValue, secondValue);
+        storeNumber(output);
+        clearSecond();
+        currentOperator = '';
+        lastClicked = '=';
+    }
 
 });
