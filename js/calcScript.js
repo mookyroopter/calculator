@@ -121,20 +121,18 @@ operators[1].addEventListener('click', () => {
         firstValue = input.value;
         //output = operator("+", firstValue, secondValue);
         //storeNumber(output);
-        currentOperator = "+";
     }
     else if (currentOperator === '' && lastClicked === 'number') {
         secondValue = input.value;
         output = operator("+", firstValue, secondValue);
         storeNumber(output);
-        currentOperator = "+";
-    }
+        }
     else {
         secondValue = input.value;
         output = operator(currentOperator, firstValue, secondValue);
         storeNumber(output);
-        currentOperator = "+";
-    }
+        }
+    currentOperator = "+";
     lastClicked = 'operator';   
 });
 
@@ -143,21 +141,19 @@ operators[2].addEventListener('click', () => {
         firstValue = input.value;
         //output = operator("+", firstValue, secondValue);
         //storeNumber(output);
-        currentOperator = "-";
     }
     else if (currentOperator === '' && lastClicked === 'number') {
         console.log("in subtract!");
         firstValue = input.value;
         output = operator("-", firstValue, "0");
         storeNumber(output);
-        currentOperator = "-";
-    }
+        }
     else {
         secondValue = input.value;
         output = operator(currentOperator, firstValue, secondValue);
-        storeNumber(output);
-        currentOperator = "-";
+        storeNumber(output);    
     }
+    currentOperator = "-";
     lastClicked = 'operator';   
 });
 
@@ -166,21 +162,18 @@ operators[3].addEventListener('click', () => {
         firstValue = input.value;
         //output = operator("+", firstValue, secondValue);
         //storeNumber(output);
-        currentOperator = "*";
     }
     else if (currentOperator === '' && lastClicked === 'number') {
-        console.log("in multiply!");
         firstValue = input.value;
         output = operator("*", firstValue, "1");
         storeNumber(output);
-        currentOperator = "*";
     }
     else {
         secondValue = input.value;
         output = operator(currentOperator, firstValue, secondValue);
         storeNumber(output);
-        currentOperator = "*";
     }
+    currentOperator = "*";
     lastClicked = 'operator';   
 });
 
@@ -189,21 +182,19 @@ operators[4].addEventListener('click', () => {
         firstValue = input.value;
         //output = operator("+", firstValue, secondValue);
         //storeNumber(output);
-        currentOperator = "/";
     }
     else if (currentOperator === '' && lastClicked === 'number') {
         console.log("in divide!");
         firstValue = input.value;
         output = operator("/", firstValue, "1");
         storeNumber(output);
-        currentOperator = "/";
     }
     else {
         secondValue = input.value;
         output = operator(currentOperator, firstValue, secondValue);
         storeNumber(output);
-        currentOperator = "/";
     }
+    currentOperator = "/";
     lastClicked = 'operator';   
 });
 

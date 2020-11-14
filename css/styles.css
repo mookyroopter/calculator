@@ -38,6 +38,7 @@ body {
     max-width: 600px;
     max-height: 700px;
     min-height: 305px;
+    background-color: rgb(68, 67, 67);
     border: 10px outset gray;
     gap: 8px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -46,7 +47,7 @@ body {
 
 .textInput {
     display: flex;
-    border: 5px inset black;
+    border: 5px inset rgb(117, 116, 116);
     grid-row-start: 1;
     grid-row-end: 2;
     grid-column-start: 1;
@@ -56,8 +57,9 @@ body {
 
 .input {
     border: hidden;
-    width: 98%;
+    width: 100%;
     font-size: 30px;
+    text-align: right;
 }
 
 .numberButtonArea {
@@ -69,8 +71,8 @@ body {
     grid-row-end: 6;
     grid-column-start: 1;
     grid-column-end: 4;
-    border: 5px outset black;
-    background-color: #f0efef;
+    border: 5px outset rgb(187, 185, 185);
+    background-color: rgb(122, 120, 120);
     grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2px;
@@ -94,14 +96,14 @@ body {
 }
 
 .operators {
-    background-color: rgb(228, 220, 220);
+    background-color: rgb(114, 114, 114);
     display: grid;
     position: relative;
     grid-row-start: 1;
     grid-row-end: 6;
     grid-column-start: 4;
     grid-column-end: 6;
-    border: 3px outset black;
+    border: 3px outset rgb(163, 161, 161);
 }
 
 .operator {
@@ -114,7 +116,7 @@ body {
     font-size: var(--adjusted-size, 30px);
     width: 75%;
     height: 80%;
-    border: 3px outset black;
+    border: 3px outset rgb(131, 130, 130);
     transition: 0.1s;
 }
 
